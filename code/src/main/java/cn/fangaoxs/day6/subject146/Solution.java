@@ -1,5 +1,9 @@
 package cn.fangaoxs.day6.subject146;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -8,16 +12,30 @@ package cn.fangaoxs.day6.subject146;
  * @Description:
  */
 public class Solution {
+
+    public static void main(String[] args) {
+        System.out.println("System.currentTimeMillis() = " + System.currentTimeMillis());
+        System.out.println("System.currentTimeMillis() = " + System.currentTimeMillis());
+        System.out.println("System.currentTimeMillis() = " + System.currentTimeMillis());
+    }
+
 }
 
 class LRUCache {
+
+    private LinkedHashMap<Integer,Integer> map;
 
     /**
      * 初始化容量
      * @param capacity  容量
      */
     public LRUCache(int capacity){
-
+        map = new LinkedHashMap<Integer,Integer>(capacity,0.75f,true){
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+                return map.size() > capacity; //移除最久未使用的元素
+            }
+        };
     }
 
     /**
@@ -26,16 +44,17 @@ class LRUCache {
      * @return
      */
     public int get(int key){
-
+        return map.getOrDefault(key,-1);
     }
 
     /**
      * 如果key已经存在则改变其value，否则以key-value的方式插入元素
-     * （在写入数据前判断容量是否已达上限，已达上线则需要在写入前删除最久未使用的数据值）
+     * （在写入数据前判断容量是否已达上限，已达上限则需要在写入前删除最久未使用的数据值）
      * @param key
      * @param value
      */
     public void put(int key,int value){
-
+        map.put(key,value);
     }
+
 }
