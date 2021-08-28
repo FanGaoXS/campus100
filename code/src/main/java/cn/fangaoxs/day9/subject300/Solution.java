@@ -1,5 +1,7 @@
 package cn.fangaoxs.day9.subject300;
 
+import java.util.HashMap;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -8,7 +10,17 @@ package cn.fangaoxs.day9.subject300;
  * @Description:
  */
 public class Solution {
-    public int lengthOfLIS(int[] nums) {
-        
+    public static int lengthOfLIS(int[] nums) {
+        int[] max = new int[nums.length];
+        /*for (int i = 0; i < ; i++) {
+
+        }*/
+        return max.length;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {10,9,2,5,3};
+        int length = lengthOfLIS(nums);
+        System.out.println("length = " + length);
     }
 }
