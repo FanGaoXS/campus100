@@ -7,10 +7,12 @@ import java.util.HashSet;
 class Solution {
     public static void main(String[] args) {
         String s = "a1234588";
-//        System.out.println("lengthOfLongestSubstring(s) = " + lengthOfLongestSubstring(s));
-        int length = lengthOfLongestSubstring2(s);
+        int length = lengthOfLongestSubstring(s);
+        int length2 = lengthOfLongestSubstring2(s);
         System.out.println("length = " + length);
+        System.out.println("length2 = " + length2);
     }
+
     public static int lengthOfLongestSubstring(String s) {
         byte[] bytes = s.getBytes();
         if (bytes.length<2) return bytes.length;
@@ -32,20 +34,22 @@ class Solution {
         return maxLength;
     }
     public static int lengthOfLongestSubstring2(String s) {
-        if (s.length()==1) return 1;
+        if (s.length()<=1) return s.length();
         int left = 0;
-        int right = 0;
+        int right = 1;
         HashSet<Character> set = new HashSet<>();
         set.add(s.charAt(left));
         int maxSize = 1;
-        while (left<=right&&right<s.length()){
-            right++;
-            if (!set.add(s.charAt(right))){
+        while (right<s.length()){
+            if (set.add(s.charAt(right))){
+                //往set中添加元素成功，则继续移动右指针，记录下此时最大的size，并且取最大
+                maxSize = Math.max(maxSize, set.size());
+                right++;
+            } else {
+                //往set中添加元素失败，说明元素已经存在，则移动左指针（并且移除左边的元素，确保当前set中没有重复元素）
                 set.remove(s.charAt(left));
                 left++;
             }
-            maxSize = Math.max(maxSize, set.size());
-
         }
         return maxSize;
     }

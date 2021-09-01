@@ -22,12 +22,11 @@ public class Solution {
     }
 
     public static int climbStairs2(int n) {
-        if (n == 1) {
-            return 1;
-        }
+        if (n<=2) return n;
         int first = 1;
         int second = 2;
-        for (int i = 0; i < n-1-1; i++) {
+        //从3开始，第n个数实际上就是第n-2次循环
+        for (int i = 1; i <= n-2; i++) {
             int sum = first + second;
             first = second;
             second = sum;
@@ -37,7 +36,7 @@ public class Solution {
 
     public static void main(String[] args) {
         int n = 5;
-        int result = climbStairs(5);
+        int result = climbStairs(n);
         int result2 = climbStairs2(n);
         System.out.println("result = " + result);
         System.out.println("result2 = " + result2);
