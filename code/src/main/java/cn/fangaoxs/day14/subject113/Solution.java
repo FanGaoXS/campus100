@@ -2,8 +2,7 @@ package cn.fangaoxs.day14.subject113;
 
 import cn.fangaoxs.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,6 +12,9 @@ import java.util.List;
  * @Description:
  */
 public class Solution {
+
+
+
     public static List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         ArrayList<List<Integer>> lists = new ArrayList<>();
         if (root == null) return lists;
@@ -21,31 +23,30 @@ public class Solution {
         dfs(root,targetSum,sum,integers,lists);
         return lists;
     }
-    public static void dfs(TreeNode node,
-                           int targetSum,
-                           int sum,
-                           List<Integer> integers,
-                           List<List<Integer>> lists){
+
+    private static void dfs(TreeNode node,
+                            int targetSum,
+                            int sum,
+                            List<Integer> integers,
+                            List<List<Integer>> lists){
         //进入dfs的node一定不为null
-        System.out.println("node.val = " + node.val);
+//        System.out.println("node.val = " + node.val);
         sum += node.val;
         integers.add(node.val);
-        if (node.left==null&&node.right==null){ //叶子节点
+        if (node.left==null&&node.right==null){ //左右子树为null，说明已经达到叶子节点
             if (sum==targetSum) {
-                System.out.println("sum = " + sum);
-                System.out.println("integers = " + integers);
-                lists.add(integers);
+//                System.out.println("sum = " + sum);
+//                System.out.println("integers = " + integers);
+                lists.add(new ArrayList<>(integers));
             }
-            System.out.println("integers = " + integers);
-            integers.remove(integers.size()-1);
-            integers = new ArrayList<>(integers);
-            System.out.println("integers = " + integers);
         }
-        if (node.left!=null){
+        if (node.left!=null){   //遍历左子树
             dfs(node.left,targetSum,sum,integers,lists);
         }
-        if (node.right!=null){
+        if (node.right!=null){  //遍历右子树
             dfs(node.right,targetSum,sum,integers,lists);
         }
+        //当前节点的左右子树遍历完毕后移除当前节点值（退回上一节点）
+        integers.remove(integers.size()-1);
     }
 }
