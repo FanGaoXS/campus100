@@ -13,7 +13,10 @@ import java.util.*;
  */
 public class Solution {
 
-
+    public static void main(String[] args) {
+        System.out.println("(int) Character.MIN_VALUE = " + (int) Character.MIN_VALUE);
+        System.out.println("(int)Character.MAX_VALUE = " + (int) Character.MAX_VALUE);
+    }
 
     public static List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         ArrayList<List<Integer>> lists = new ArrayList<>();
@@ -37,7 +40,7 @@ public class Solution {
             if (sum==targetSum) {
 //                System.out.println("sum = " + sum);
 //                System.out.println("integers = " + integers);
-                lists.add(new ArrayList<>(integers));
+                lists.add(integers);
             }
         }
         if (node.left!=null){   //遍历左子树
