@@ -11,6 +11,7 @@ import java.util.Stack;
  */
 class MyQueue {
 
+    
     private final Stack<Integer> stackInput;  //输入栈
     private final Stack<Integer> stackOutput;  //输出栈
 
