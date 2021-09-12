@@ -90,6 +90,16 @@ public class Solution {
         return tempNode;
     }
 
+    /*public static ListNode reverseList5(ListNode head){
+        *//*if (head == null) return null;
+        ListNode node = null;
+        while (head!=null){
+            node = new ListNode(head.val);
+            head = head.next;
+        }
+        return node.next;*//*
+    }*/
+
     public static void main(String[] args) {
         ListNode head = new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4,new ListNode(5)))));
         ListNode node = reverseList2(head);
