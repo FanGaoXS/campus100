@@ -25,6 +25,18 @@ public class Solution {
         return false;
     }
 
+    public static boolean hasCycle2(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;           //慢指针
+        ListNode fast = head.next;      //快指针
+        while (fast!=null && fast.next!=null){
+            if (slow == fast) return true;  //快慢指针相遇了
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         ListNode head = new ListNode(3);
         ListNode second = new ListNode(2);

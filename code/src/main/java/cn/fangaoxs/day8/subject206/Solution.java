@@ -90,19 +90,21 @@ public class Solution {
         return tempNode;
     }
 
-    /*public static ListNode reverseList5(ListNode head){
-        *//*if (head == null) return null;
-        ListNode node = null;
+    public static ListNode reverseList5(ListNode head){
+        if (head == null) return null;
+        ListNode newHead = null;
         while (head!=null){
-            node = new ListNode(head.val);
-            head = head.next;
+            ListNode tempNode = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = tempNode;
         }
-        return node.next;*//*
-    }*/
+        return newHead;
+    }
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4,new ListNode(5)))));
-        ListNode node = reverseList2(head);
+        ListNode node = reverseList5(head);
         while (node!=null){
             System.out.println("node.val = " + node.val);
             node = node.next;

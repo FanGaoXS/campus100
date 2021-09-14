@@ -22,6 +22,8 @@ class Solution {
         int[] height = {4,2,0,3,2,5};
         int trap = trap(height);
         System.out.println("trap = " + trap);
+        int trap2 = trap2(height);
+        System.out.println("trap2 = " + trap2);
     }
     public static int trap(int[] height) {
         int maxHeightValue = 0;
@@ -50,6 +52,38 @@ class Solution {
                 //右边能蓄水总是为：右边目前最高高度减去下一位置的高度（高度差）
                 v += rightMaxHeight - height[i-1];
             }
+        }
+        return v;
+    }
+
+    public static int trap2(int[] height) {
+        //接的雨水的体积
+        int v = 0;
+        //数组中最大值的下标和值
+        int maxHeightIndex = -1;
+        int maxHeightValue = -1;
+        for (int i = 0; i < height.length; i++) {
+            //找出数组最大值以及它的下标
+            if (height[i]>maxHeightValue) {
+                maxHeightIndex = i;
+                maxHeightValue = height[i];
+            }
+        }
+        int leftMaxHeightValue = 0;
+        for (int i = 0; i < maxHeightIndex; i++) {
+            if (height[i]>=leftMaxHeightValue) {
+                leftMaxHeightValue = height[i];
+                continue;
+            }
+            v += leftMaxHeightValue - height[i];
+        }
+        int rightMaxHeightValue = 0;
+        for (int i = height.length-1; i > maxHeightIndex; i--) {
+            if (height[i]>rightMaxHeightValue){
+                rightMaxHeightValue = height[i];
+                continue;
+            }
+            v += rightMaxHeightValue - height[i];
         }
         return v;
     }
