@@ -2,8 +2,7 @@ package cn.fangaoxs.day23.subject104;
 
 import cn.fangaoxs.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,6 +60,25 @@ public class Solution {
         }
         depth--;    //深度-1（状态恢复）
     }
+
+    //返回当前结点的深度（当前结点的深度为左右子树的最大深度+1）
+    public int maxDepth3(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(maxDepth3(root.left),maxDepth3(root.right))+1;
+    }
+
+    private Map<TreeNode,Integer> map = new HashMap<>();
+
+    //maxDepth3的改进（增加了map作为memory缓存）
+    public int maxDepth4(TreeNode root) {
+        if (root == null) return 0;
+        if (map.containsKey(root)) return map.get(root);
+        int maxDepth = Math.max(maxDepth4(root.left),maxDepth4(root.right))+1;
+        map.put(root,maxDepth);
+        return maxDepth;
+    }
+
+
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)));
