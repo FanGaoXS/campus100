@@ -14,7 +14,8 @@ class Solution {
 
     public static void main(String[] args) {
         int[][] matrix = { {1,2,3,4},{5,6,7,8},{9,10,11,12} };
-        System.out.println("spiralOrder(matrix) = " + spiralOrder(matrix));
+        List<Integer> integers = spiralOrder2(matrix);
+        System.out.println("integers = " + integers);
     }
 
     public static List<Integer> spiralOrder(int[][] matrix) {
@@ -56,5 +57,57 @@ class Solution {
             }
         }
         return result;
+    }
+
+    public static List<Integer> spiralOrder2(int[][] matrix) {
+        int up = 0;
+        int down = matrix.length-1;
+        int left = 0;
+        int right = matrix[0].length-1;
+        int size = (down+1) * (right+1);
+        ArrayList<Integer> integers = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        int duration = 1;
+        while (integers.size() != size) {
+            if (duration == 1) {            //向右走
+                integers.add(matrix[i][j]);
+                if (j == right) {
+                    duration = 2;
+                    up++;
+                    i = up;
+                } else {
+                    j++;
+                }
+            } else if (duration == 2) {     //向下
+                integers.add(matrix[i][j]);
+                if (i == down) {
+                    duration = 3;
+                    right--;
+                    j = right;
+                } else {
+                    i++;
+                }
+            } else if (duration == 3) {     //向左
+                integers.add(matrix[i][j]);
+                if (j == left) {
+                    duration = 4;
+                    down--;
+                    i = down;
+                } else {
+                    j--;
+                }
+            } else if (duration == 4) {     //向上
+                integers.add(matrix[i][j]);
+                if (i == up) {
+                    duration = 1;
+                    left++;
+                    j = left;
+                } else {
+                    i--;
+                }
+            }
+        }
+        return integers;
     }
 }
